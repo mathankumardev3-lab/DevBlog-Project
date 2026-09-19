@@ -27,17 +27,17 @@ ALLOWED_HOSTS = os.environ.get(
 # =========================
 
 INSTALLED_APPS = [
-    "cloudinary",
-    "cloudinary_storage",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-
+    "cloudinary",
+    "cloudinary_storage",
     "blog",
     "accounts",
+    
 ]
 
 
@@ -149,14 +149,20 @@ STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
 
-STATICFILES_STORAGE = (
-    "whitenoise.storage.CompressedManifestStaticFilesStorage"
-)
-
 
 # =========================
-# MEDIA FILES
+# CLOUDINARY MEDIA FILES
 # =========================
+
+MEDIA_URL = "/media/"
+
+CLOUDINARY_STORAGE = {
+    "CLOUD_NAME": os.environ.get("CLOUDINARY_CLOUD_NAME"),
+    "API_KEY": os.environ.get("CLOUDINARY_API_KEY"),
+    "API_SECRET": os.environ.get("CLOUDINARY_API_SECRET"),
+}
+
+
 STORAGES = {
     "default": {
         "BACKEND": "cloudinary_storage.storage.MediaCloudinaryStorage",
